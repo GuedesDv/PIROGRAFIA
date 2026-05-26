@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quadros Pirografados por Arimatea</title>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    :root{
+      --silver:#BFACAA;
+      --black:#02020A;
+      --prussian:#05204A;
+      --lavender:#E1E2EF;
+    }
+
+    body{
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--lavender);
+      color:var(--black);
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+
+    .container{
+      width:min(1120px,90%);
+      margin:0 auto;
+    }
+
+    header{
+      position:fixed;
+      top:0;
+      width:100%;
+      z-index:1000;
+      background:rgba(225,226,239,.88);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(5,32,74,.15);
+    }
+
+    nav{
+      height:82px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-weight:800;
+    }
+
+    .logo-icon{
+      width:64px;
+      height:64px;
+      object-fit:contain;
+      border-radius:14px;
+    }
+
+    .logo-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1;
+    }
+
+    .logo-text span{
+      font-size:18px;
+      color:var(--prussian);
+      font-weight:900;
+    }
+
+    .logo-text small{
+      margin-top:5px;
+      font-size:11px;
+      letter-spacing:2px;
+      color:var(--black);
+      text-transform:uppercase;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:28px;
+      font-size:.95rem;
+      color:var(--prussian);
+      font-weight:700;
+    }
+
+    .nav-links a:hover{
+      color:var(--black);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 24px;
+      border-radius:999px;
+      font-weight:800;
+      transition:.3s ease;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:var(--prussian);
+      color:var(--lavender);
+      box-shadow:0 12px 30px rgba(5,32,74,.25);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-3px);
+      box-shadow:0 18px 42px rgba(5,32,74,.35);
+    }
+
+    .btn-outline{
+      border:2px solid var(--prussian);
+      color:var(--prussian);
+      background:transparent;
+    }
+
+    .btn-outline:hover{
+      background:var(--prussian);
+      color:var(--lavender);
+      transform:translateY(-3px);
+    }
+
+    .hero{
+      min-height:100vh;
+      padding-top:120px;
+      display:flex;
+      align-items:center;
+      position:relative;
+      background:
+        linear-gradient(135deg,rgba(225,226,239,.95),rgba(191,172,170,.82)),
+        url("https://images.unsplash.com/photo-1510070009289-b5bc34383727?auto=format&fit=crop&w=1600&q=80");
+      background-size:cover;
+      background-position:center;
+    }
+
+    .hero-grid{
+      position:relative;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:60px;
+      align-items:center;
+    }
+
+    .tag{
+      display:inline-block;
+      margin-bottom:18px;
+      padding:8px 14px;
+      border:1px solid var(--prussian);
+      border-radius:999px;
+      color:var(--prussian);
+      background:rgba(255,255,255,.35);
+      font-size:.9rem;
+      font-weight:700;
+    }
+
+    h1{
+      font-size:clamp(2.6rem,7vw,5.6rem);
+      line-height:.96;
+      margin-bottom:24px;
+      letter-spacing:-3px;
+      color:var(--prussian);
+    }
+
+    .hero p{
+      font-size:1.15rem;
+      line-height:1.7;
+      color:var(--black);
+      max-width:590px;
+      margin-bottom:32px;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:34px;
+    }
+
+    .checks{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      color:var(--black);
+      font-size:.95rem;
+      font-weight:700;
+    }
+
+    .art-card{
+      position:relative;
+      border-radius:34px;
+      overflow:hidden;
+      background:var(--silver);
+      border:1px solid rgba(5,32,74,.2);
+      box-shadow:0 28px 80px rgba(2,2,10,.22);
+    }
+
+    .art-card img{
+      height:520px;
+      width:100%;
+      object-fit:cover;
+      filter:contrast(1.05);
+    }
+
+    .art-card-info{
+      position:absolute;
+      left:22px;
+      right:22px;
+      bottom:22px;
+      padding:20px;
+      border-radius:24px;
+      background:rgba(225,226,239,.88);
+      backdrop-filter:blur(14px);
+      border:1px solid rgba(5,32,74,.2);
+      color:var(--black);
+    }
+
+    section{padding:105px 0}
+
+    .section-title{
+      max-width:760px;
+      margin-bottom:50px;
+    }
+
+    .section-title.center{
+      margin-left:auto;
+      margin-right:auto;
+      text-align:center;
+    }
+
+    .section-title span{
+      color:var(--prussian);
+      font-weight:900;
+      text-transform:uppercase;
+      font-size:.85rem;
+      letter-spacing:2px;
+    }
+
+    .section-title h2{
+      font-size:clamp(2rem,4vw,3.5rem);
+      margin-top:12px;
+      line-height:1.05;
+      color:var(--prussian);
+    }
+
+    .section-title p{
+      margin-top:18px;
+      color:var(--black);
+      line-height:1.7;
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+    }
+
+    .step,.style-card,.testimonial{
+      background:rgba(191,172,170,.45);
+      border:1px solid rgba(5,32,74,.18);
+      border-radius:28px;
+      padding:30px;
+      transition:.3s ease;
+    }
+
+    .step:hover,.style-card:hover,.testimonial:hover{
+      transform:translateY(-8px);
+      border-color:var(--prussian);
+      background:rgba(191,172,170,.7);
+    }
+
+    .icon{
+      width:62px;
+      height:62px;
+      display:grid;
+      place-items:center;
+      margin-bottom:20px;
+      border-radius:20px;
+      background:var(--prussian);
+      color:var(--lavender);
+      font-size:1.8rem;
+    }
+
+    .step h3,.style-card h3{
+      font-size:1.35rem;
+      margin-bottom:12px;
+      color:var(--prussian);
+    }
+
+    .step p,.style-card p,.testimonial p{
+      color:var(--black);
+      line-height:1.7;
+    }
+
+    .styles-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:22px;
+    }
+
+    .style-card{
+      min-height:260px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      background-size:cover;
+      background-position:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .style-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top,rgba(225,226,239,.95),rgba(225,226,239,.18));
+    }
+
+    .style-card h3,.style-card p{position:relative}
+
+    .about{
+      background:var(--silver);
+    }
+
+    .about-grid{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:56px;
+      align-items:center;
+    }
+
+    .about-image{
+      border-radius:34px;
+      overflow:hidden;
+      border:1px solid rgba(5,32,74,.2);
+      box-shadow:0 28px 70px rgba(2,2,10,.22);
+    }
+
+    .about-image img{
+      height:520px;
+      width:100%;
+      object-fit:cover;
+    }
+
+    .testimonials-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+    }
+
+    .stars{
+      color:var(--prussian);
+      margin-bottom:14px;
+      letter-spacing:2px;
+      font-weight:900;
+    }
+
+    .cta{
+      position:relative;
+      text-align:center;
+      background:var(--prussian);
+      color:var(--lavender);
+    }
+
+    .cta h2{
+      font-size:clamp(2.2rem,5vw,4.5rem);
+      line-height:1;
+      max-width:850px;
+      margin:0 auto 22px;
+      color:var(--lavender);
+    }
+
+    .cta p{
+      max-width:640px;
+      margin:0 auto 34px;
+      color:var(--lavender);
+      line-height:1.7;
+    }
+
+    .cta .btn-primary{
+      background:var(--lavender);
+      color:var(--prussian);
+    }
+
+    footer{
+      padding:32px 0;
+      border-top:1px solid rgba(5,32,74,.15);
+      color:var(--black);
+      text-align:center;
+      background:var(--silver);
+    }
+
+    .whatsapp-float{
+      position:fixed;
+      bottom:25px;
+      right:25px;
+      width:70px;
+      height:70px;
+      border-radius:50%;
+      background:#25d366;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      z-index:9999;
+      box-shadow:0 10px 35px rgba(0,0,0,.35);
+      transition:.3s;
+      animation:pulse 2s infinite;
+    }
+
+    .whatsapp-float:hover{transform:scale(1.1)}
+    .whatsapp-float svg{width:34px;height:34px}
+
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(37,211,102,.6)}
+      70%{box-shadow:0 0 0 18px rgba(37,211,102,0)}
+      100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(50px);
+      transition:.9s ease;
+    }
+
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .reveal-left{
+      opacity:0;
+      transform:translateX(-60px);
+      transition:.9s ease;
+    }
+
+    .reveal-right{
+      opacity:0;
+      transform:translateX(60px);
+      transition:.9s ease;
+    }
+
+    .reveal-left.active,.reveal-right.active{
+      opacity:1;
+      transform:translateX(0);
+    }
+
+   /* MOBILE MELHORADO */
+@media(max-width:560px){
+
+  .container{
+    width:90%;
+  }
+
+  header{
+    background:rgba(225,226,239,.95);
+  }
+
+  nav{
+    height:62px;
+    padding:0;
+  }
+
+  .logo{
+    gap:0;
+    max-width:none;
+  }
+
+  .logo-icon{
+    width:42px;
+    height:42px;
+    object-fit:contain;
+    flex-shrink:0;
+  }
+
+  .logo-text{
+    display:none;
+  }
+
+  .nav-links{
+    display:flex !important;
+    align-items:center;
+    gap:14px;
+  }
+
+  .nav-links a{
+    display:none;
+    font-size:11px;
+    font-weight:800;
+    white-space:nowrap;
+    color:var(--prussian);
+  }
+
+  .nav-links a[href="#home"],
+  .nav-links a[href="#contato"]{
+    display:inline-flex;
+  }
+
+  .nav-links a[href="#contato"]{
+    padding:8px 12px;
+    border-radius:999px;
+    background:var(--prussian);
+    color:var(--lavender);
+  }
+
+  .hero{
+    min-height:auto;
+    padding:92px 0 45px;
+    align-items:flex-start;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(225,226,239,.92) 0%,
+        rgba(225,226,239,.82) 42%,
+        rgba(191,172,170,.9) 100%
+      ),
+      url("https://images.unsplash.com/photo-1510070009289-b5bc34383727?auto=format&fit=crop&w=900&q=80");
+    background-size:cover;
+    background-position:center top;
+  }
+
+  .hero-grid{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+
+  .tag{
+    font-size:10px;
+    padding:7px 12px;
+    margin-bottom:14px;
+  }
+
+  h1{
+    font-size:34px;
+    line-height:1;
+    letter-spacing:-1.5px;
+    margin-bottom:18px;
+  }
+
+  .hero p{
+    font-size:14px;
+    line-height:1.65;
+    margin-bottom:24px;
+  }
+
+  .hero-actions{
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    margin:24px auto 24px;
+    width:100%;
+  }
+
+  .btn{
+    width:92%;
+    max-width:330px;
+    padding:14px 18px;
+    font-size:14px;
+    margin:0 auto;
+  }
+
+  .checks{
+    flex-direction:column;
+    gap:8px;
+    font-size:13px;
+    margin-top:6px;
+  }
+
+  .art-card{
+    border-radius:24px;
+    margin-top:14px;
+  }
+
+  .art-card img{
+    height:270px;
+    object-fit:cover;
+    object-position:center;
+  }
+
+  .art-card-info{
+    left:12px;
+    right:12px;
+    bottom:12px;
+    padding:14px;
+    border-radius:16px;
+    font-size:13px;
+  }
+
+  section{
+    padding:58px 0;
+  }
+
+  .section-title{
+    margin-bottom:28px;
+  }
+
+  .section-title span{
+    font-size:11px;
+  }
+
+  .section-title h2{
+    font-size:28px;
+    line-height:1.05;
+  }
+
+  .section-title p{
+    font-size:14px;
+    line-height:1.6;
+  }
+
+  .steps,
+  .testimonials-grid{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .step,
+  .testimonial{
+    padding:22px;
+    border-radius:22px;
+  }
+
+  .icon{
+    width:52px;
+    height:52px;
+    font-size:22px;
+    border-radius:16px;
+  }
+
+  .step h3,
+  .style-card h3{
+    font-size:20px;
+  }
+
+  .step p,
+  .style-card p,
+  .testimonial p{
+    font-size:14px;
+  }
+
+  .styles-grid{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .style-card{
+    min-height:270px;
+    border-radius:24px;
+  }
+
+  .style-card::before{
+    background:linear-gradient(
+      to top,
+      rgba(225,226,239,.96),
+      rgba(225,226,239,.16)
+    );
+  }
+
+  .about-grid{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+
+  .about-image img{
+    height:280px;
+    object-fit:cover;
+  }
+
+  .cta h2{
+    font-size:30px;
+  }
+
+  .cta p{
+    font-size:14px;
+  }
+
+  footer{
+    font-size:13px;
+    padding:24px 0;
+  }
+
+  .whatsapp-float{
+    width:58px;
+    height:58px;
+    right:16px;
+    bottom:16px;
+  }
+
+  .whatsapp-float svg{
+    width:28px;
+    height:28px;
+  }
+  
+}
+@media(max-width:314px){
+
+.container{
+width:92%;
+}
+
+nav{
+height:58px;
+}
+
+.logo-icon{
+width:34px;
+height:34px;
+}
+
+.nav-links{
+gap:8px;
+}
+
+.nav-links a{
+font-size:9px;
+padding:6px 8px !important;
+}
+
+.hero{
+padding:82px 0 35px;
+}
+
+.tag{
+font-size:9px;
+padding:6px 10px;
+margin-bottom:12px;
+}
+
+h1{
+font-size:28px;
+line-height:1;
+letter-spacing:-1px;
+margin-bottom:14px;
+}
+
+.hero p{
+font-size:13px;
+line-height:1.5;
+margin-bottom:20px;
+}
+
+.btn{
+width:100%;
+max-width:100%;
+padding:12px 14px;
+font-size:13px;
+}
+
+.checks{
+font-size:12px;
+gap:6px;
+}
+
+.art-card{
+margin-top:10px;
+border-radius:18px;
+}
+
+.art-card img{
+height:210px;
+}
+
+.art-card-info{
+padding:10px;
+font-size:12px;
+}
+
+.section-title h2{
+font-size:24px;
+}
+
+.section-title p{
+font-size:13px;
+}
+
+.step,
+.testimonial{
+padding:18px;
+}
+
+.icon{
+width:45px;
+height:45px;
+font-size:18px;
+}
+
+.step h3,
+.style-card h3{
+font-size:16px;
+}
+
+.step p,
+.style-card p,
+.testimonial p{
+font-size:13px;
+}
+
+.style-card{
+min-height:220px;
+}
+
+.about-image img{
+height:220px;
+}
+
+.cta h2{
+font-size:25px;
+}
+
+.cta p{
+font-size:13px;
+}
+
+.whatsapp-float{
+width:50px;
+height:50px;
+right:10px;
+bottom:10px;
+}
+
+.whatsapp-float svg{
+width:24px;
+height:24px;
+}
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a href="#home" class="logo">
+        <img src="/logo.png" class="logo-icon" alt="Logo Quadros Pirografados por Arimatea">
+
+        <div class="logo-text">
+          <span>Quadros Pirografados</span>
+          <small>por Arimatea</small>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#estilos">Estilos</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+  <div class="container hero-grid">
+
+    <div class="reveal-left">
+      <span class="tag">Quadros pirografados sob encomenda</span>
+
+      <h1>Quadros Pirografados por Arimatea</h1>
+
+      <p>
+        Retratos, rostos, pets, frases e ideias personalizadas feitos à mão com a técnica da pirografia. Você envia a foto ou ideia, e ela vira uma peça única.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://wa.me/5519994639495?text=Olá! Quero fazer uma encomenda de quadro pirografado." target="_blank">Fazer encomenda</a>
+        <a class="btn btn-outline" href="#estilos">Ver modelos</a>
+      </div>
+
+      <div class="checks">
+        <span>✔ Feito à mão</span>
+        <span>✔ Arte exclusiva</span>
+        <span>✔ Envio para todo Brasil</span>
+      </div>
+    </div>
+
+    <div class="art-card reveal-right">
+      <img src="https://images.unsplash.com/photo-1602524206684-50f6f4c6b235?auto=format&fit=crop&w=900&q=80" alt="Quadro artesanal em madeira">
+      <div class="art-card-info">
+        <strong>Peças personalizadas</strong>
+        <p>Rostos, famílias, pets, frases e símbolos marcados na madeira.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="como-funciona">
+  <div class="container">
+
+    <div class="section-title reveal">
+      <span>Processo simples</span>
+      <h2>Da sua foto ao quadro pronto</h2>
+      <p>Você não precisa saber desenhar ou escolher tudo sozinho. Eu te ajudo a transformar sua ideia em uma arte bonita, afetiva e possível de gravar na madeira.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="icon">📷</div>
+        <h3>1. Envie sua referência</h3>
+        <p>Pode ser uma foto de rosto, casal, família, pet, frase, símbolo ou uma ideia livre.</p>
+      </div>
+
+      <div class="step reveal">
+        <div class="icon">🔥</div>
+        <h3>2. A arte é pirografada</h3>
+        <p>A imagem é adaptada e gravada manualmente na madeira, respeitando os detalhes principais.</p>
+      </div>
+
+      <div class="step reveal">
+        <div class="icon">📦</div>
+        <h3>3. Receba sua peça</h3>
+        <p>O quadro é finalizado, protegido e enviado para você ou diretamente para presentear alguém.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="estilos">
+  <div class="container">
+
+    <div class="section-title reveal">
+      <span>Possibilidades</span>
+      <h2>Escolha um estilo ou peça algo exclusivo</h2>
+      <p>A pirografia combina com presentes afetivos, decoração rústica, homenagens, memória familiar e arte popular.</p>
+    </div>
+
+    <div class="styles-grid">
+      <div class="style-card reveal" style="background-image:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80');">
+        <h3>Retratos</h3>
+        <p>Rostos, casais, família e homenagens.</p>
+      </div>
+
+      <div class="style-card reveal" style="background-image:url('https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=700&q=80');">
+        <h3>Pets</h3>
+        <p>Cães, gatos e animais especiais.</p>
+      </div>
+
+      <div class="style-card reveal" style="background-image:url('https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?auto=format&fit=crop&w=700&q=80');">
+        <h3>Frases</h3>
+        <p>Mensagens, nomes, datas e dedicatórias.</p>
+      </div>
+
+      <div class="style-card reveal" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80');">
+        <h3>Arte livre</h3>
+        <p>Cordel, natureza, símbolos e ideias autorais.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="about">
+  <div class="container about-grid">
+
+    <div class="about-image reveal-left">
+      <img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=900&q=80" alt="Processo artesanal em madeira">
+    </div>
+
+    <div class="section-title reveal-right">
+      <span>Feito à mão</span>
+      <h2>Não é só decoração. É memória marcada no fogo.</h2>
+      <p>
+        Cada peça é única. A madeira tem veios próprios, o traço é manual e o resultado carrega textura, calor e identidade.
+      </p>
+      <a class="btn btn-primary" href="https://wa.me/5519994639495?text=Olá! Gostaria de pedir um orçamento para um quadro pirografado." target="_blank">Pedir orçamento pelo WhatsApp</a>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="container">
+
+    <div class="section-title center reveal">
+      <span>Clientes</span>
+      <h2>Presentes que carregam emoção</h2>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial reveal">
+        <div class="stars">★★★★★</div>
+        <p>“Foi um presente muito especial. A pessoa reconheceu cada detalhe e se emocionou.”</p>
+      </div>
+
+      <div class="testimonial reveal">
+        <div class="stars">★★★★★</div>
+        <p>“A madeira deixou a arte ainda mais bonita. Ficou com cara de lembrança antiga e valiosa.”</p>
+      </div>
+
+      <div class="testimonial reveal">
+        <div class="stars">★★★★★</div>
+        <p>“Enviei uma foto simples e recebi um quadro único. Ficou muito melhor do que imaginei.”</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta" id="contato">
+  <div class="container reveal">
+    <h2>Sua história merece ficar marcada.</h2>
+    <p>Envie sua foto, conte sua ideia e receba um orçamento para transformar sua memória em um quadro pirografado.</p>
+    <a class="btn btn-primary" href="https://wa.me/5519994639495?text=Olá! Quero encomendar um quadro pirografado personalizado." target="_blank">Enviar minha foto no WhatsApp</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Quadros Pirografados por Arimatea</p>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/5519994639495?text=Olá! Quero encomendar um quadro pirografado." target="_blank" aria-label="Enviar mensagem no WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M13.601 2.326A7.854 7.854 0 0 0 8.004 0C3.58 0-.007 3.587 0 8.01a7.94 7.94 0 0 0 1.084 4L0 16l4.096-1.073A7.96 7.96 0 0 0 8.004 16h.003c4.423 0 8.01-3.587 8.01-8.01a7.95 7.95 0 0 0-2.416-5.664z"/>
+    <path d="M11.696 9.861c-.2-.1-1.182-.584-1.365-.65-.183-.067-.316-.1-.45.1-.133.2-.516.65-.633.784-.116.133-.233.15-.433.05-.2-.1-.845-.311-1.61-.993-.595-.53-.997-1.185-1.113-1.385-.117-.2-.012-.307.088-.406.09-.089.2-.233.3-.35.1-.117.133-.2.2-.333.066-.134.033-.25-.017-.35-.05-.1-.45-1.083-.616-1.483-.162-.39-.326-.337-.45-.344h-.383c-.133 0-.35.05-.533.25-.183.2-.7.683-.7 1.666s.716 1.933.816 2.066c.1.134 1.41 2.153 3.416 3.018.477.206.85.33 1.14.422.479.153.916.131 1.26.08.384-.057 1.182-.483 1.35-.95.166-.466.166-.866.116-.95-.05-.083-.183-.133-.383-.233z"/>
+  </svg>
+</a>
+
+<script>
+  const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+  function revealOnScroll(){
+    const windowHeight = window.innerHeight;
+
+    revealElements.forEach((element)=>{
+      const elementTop = element.getBoundingClientRect().top;
+      const revealPoint = 120;
+
+      if(elementTop < windowHeight - revealPoint){
+        element.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+</script>
+
+</body>
+</html>
